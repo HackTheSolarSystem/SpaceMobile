@@ -11,6 +11,7 @@ export default class PedometerSensor extends React.Component {
       isPedometerAvailable: "checking",
       pastStepCount: 0,
       currentStepCount: 0,
+      activeGame: false,
       celestialBody: {
         name: 'Earth',
         description: '',
