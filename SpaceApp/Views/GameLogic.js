@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Button, Platform, Image } from 'react-native';
 import { Pedometer } from "expo";
+import Torch from 'react-native-torch';
 
 import PlanetView from './PlanetView';
 import Accelerometer from '../Components/Accelerometer';
@@ -21,9 +22,16 @@ export default class PedometerSensor extends React.Component {
         distanceActual: 3713,
         speedOfOrbitRoom: 0.6,
         speedOfOrbitActual: 40,
+//         name: 'The Sun',
+//         description: '',
+//         distanceRoom: 2,
+//         distanceActual: 5000,
+//         speedOfOrbitRoom: 1.2,
+//         speedOfOrbitActual: 5000,
       },
       distanceCheck: false,
       speedCheck: false,
+      gameStatus: true,
     };
   }
 
@@ -35,6 +43,7 @@ export default class PedometerSensor extends React.Component {
 
   componentWillUnmount() {
     this._unsubscribe();
+    this.setState({ currentStepCount: 0 })
   }
 
   _subscribe = () => {
@@ -91,6 +100,14 @@ export default class PedometerSensor extends React.Component {
   //   // }
   // }
 
+  triggerBlackhole = () => {
+    this.setState({ currentStepCount: 0, distanceCheck: false, gameStatus: false })
+  }
+
+  endGame = () => {
+    this.setState({ gameStatus: false })
+  }
+
   render() {
     if (!Pedometer.isAvailableAsync()) {
       return (
@@ -100,19 +117,41 @@ export default class PedometerSensor extends React.Component {
       )
     };
 
+//last-fixes
     if (this.state.currentStepCount < this.state.celestialBody.distanceRoom) {
       const {name, distanceActual, distanceRoom} = this.state.celestialBody;
       const {currentStepCount} = this.state;
+    // if (!this.state.gameStatus) {
+    //   return (
+    //     <View style={styles.container}>
+    //       <Text style={{ color: 'white' }}>GAME OVER</Text>
+    //     </View>
+    //   )
+    // }
+
+    if (this.state.celestialBody.name === 'The Sun') {
+      const uri = !this.state.gameStatus ? require('../assets/blackhole.png') : require('../assets/sun.png')
+
+      // Torch.switchState(true);
+
       return (
         <View style={styles.container}>
-          <PlanetView name={name} distanceActual={distanceActual} distanceRoom={distanceRoom} currentStepCount={currentStepCount}/>
-          {/* <Text>
-            You are {this.state.celestialBody.name}
-          </Text> */}
-          {/* <Text>
-            Walk {this.state.celestialBody.distanceActual} watermelons
-            <Text> ({this.state.celestialBody.distanceRoom} steps) away from the Sun.</Text>
-          </Text> */}
+          <Image style={{ width: 400, height: 400 }} source={uri} />
+
+          <Button title='COLLAPSE INTO BLACK HOLE' onPress={this.triggerBlackhole} style={styles.button} />
+          {/* <Button title='END GAME' onPress={this.endGame} style={styles.button} /> */}
+
+        </View>
+      )
+    }
+
+    if (this.state.currentStepCount <= 1) {
+      const { name, distanceActual, distanceRoom } = this.state.celestialBody;
+      const { currentStepCount } = this.state;
+      
+      return (
+        <View style={styles.container}>
+          <PlanetView name={name} distanceActual={distanceActual} distanceRoom={distanceRoom} currentStepCount={currentStepCount} />
         </View>
       )
     };
@@ -121,12 +160,15 @@ export default class PedometerSensor extends React.Component {
       // { !this.state.distanceCheck ? this._updateDistanceCheck : null }
       return (
         <View style={styles.container}>
-        {/*NEEDS VIEW FOR SPEEDING UP SLOWING DOWN*/}
-          <Text>
+          {/*NEEDS VIEW FOR SPEEDING UP SLOWING DOWN*/}
+          <Text style={{ fontSize: 50, color: '#ffffff' }}>
             Begin orbiting
           </Text>
-          {/* <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} /> */}
-          <AugmentedGame speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom}/>
+//           {/* <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} /> */}
+//           <AugmentedGame speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom}/>
+
+          <Image style={{ width: 400, height: 400 }} source={{ uri: 'https://i.postimg.cc/g0DCd9Mr/Planet-500x500-Earth.png' }} />
+          <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} />
         </View>
       )
     };
@@ -146,8 +188,13 @@ export default class PedometerSensor extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000000',
+    marginTop: 15,
     alignItems: "center",
     justifyContent: "center"
+  },
+  button: {
+    margin: 5,
   }
 });
 

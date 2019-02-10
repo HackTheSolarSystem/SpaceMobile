@@ -50,21 +50,21 @@ export default class AccelerometerSensor extends React.Component {
     const acceleration = Math.sqrt(x ** 2 + y ** 2 + z ** 2)
     let { speedOfOrbitRoom } = this.props;
 
-    if (acceleration <= speedOfOrbitRoom + 0.2 && acceleration >= speedOfOrbitRoom - 0.2) {
+    if (acceleration <= speedOfOrbitRoom + 0.2 && acceleration >= speedOfOrbitRoom - 0.1) {
       return (
-        <View style={styles.sensor}>
+        <View style={{ fontSize: 40, color: '#ffffff' }}>
           <Text>SWEET ORBIT!</Text>
         </View>
       );
-    } else if (acceleration >= speedOfOrbitRoom + 0.4) {
+    } else if (acceleration >= speedOfOrbitRoom + 0.5) {
       return (
-        <View style={styles.sensor}>
+        <View style={{ fontSize: 40, color: '#ffffff' }}>
           <Text>SLOWER!</Text>
         </View>
       )
     } else {
       return (
-        <View style={styles.sensor}>
+        <View style={{ fontSize: 40, color: '#ffffff' }}>
           <Text>FASTER!</Text>
         </View>
       )
@@ -74,7 +74,9 @@ export default class AccelerometerSensor extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#000000',
+    alignItems: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
