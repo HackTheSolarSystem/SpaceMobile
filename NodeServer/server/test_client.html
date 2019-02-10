@@ -10,7 +10,7 @@
   <input type="button" id="join" value="join" />
   <input type="button" id="start" value="start" />
   <input type="button" id="move" value="move" />
-  <input type="button" id="end_game" value="end_game" />
+  <input type="button" id="end" value="end" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -18,6 +18,22 @@
     // connet to the server
     var socket = io();
     var planet_name = null;
+
+    $( "#join" ).click(function() {
+        if (planet_name != null) {
+            $("#msg").append("<div>You can join only once.</div>");
+            return;
+        }
+        socket.emit("join");
+    });
+
+    $("#start").click(function() {
+        socket.emit("start");
+    });
+
+    $("#end").click(function() {
+        socket.emit("end");
+    });
 
     socket.on("join", data => {
         if (typeof data.error != 'undefined') {
@@ -37,22 +53,16 @@
         }
       
     });
-    
-    $( "#join" ).click(function() {
-        if (planet_name != null) {
-            $("#msg").append("<div>You can join only once.</div>");
-            return;
+
+    socket.on("end", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            planet_name = null;
+            $("#msg").append("<div>" + data.message + ".</div>");
         }
-        socket.emit("join");
     });
 
-    $("#start").click(function() {
-        if (socket == null) {
-            $("#msg").append("<div>You haven't joined the game.</div>");
-            return;
-        }
-        socket.emit("start");
-    });
   });
   </script>
 </body>

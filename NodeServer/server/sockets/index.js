@@ -56,6 +56,13 @@ const is_sun = (socket_id) => {
     return planets[0]['socket_id'] == socket_id;
 }
 
+const init_game = (socket_id) => {
+    status = null;
+    for (var i = 0; i < planets.length; i++) {
+        planets[i]['socket_id'] = null;
+    }
+}
+
 const prepare_game = (socket_id) => {
     for (var i = 0; i < planets.length; i++) {
         if (planets[i]['name'] == 'Sun') {
@@ -148,11 +155,11 @@ io.on('connection', socket => {
     // end game
     socket.on('end', () => {
         if (is_sun(socket.id)) {
-            status = 'playing'
-            io.emit("end", {"message": "game started"});
-            console.log(`Sun started the game`);
+            init_game();
+            io.emit("end", {"message": "game ended"});
+            console.log(`Sun ended the game`);
         }else {
-            socket.emit("start", {"error": "only Sun can start game"});
+            socket.emit("start", {"error": "only Sun can end game"});
         }
         sung_debug();
     })
