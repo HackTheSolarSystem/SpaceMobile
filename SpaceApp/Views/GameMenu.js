@@ -1,7 +1,9 @@
+
 import React from 'react'
 import { View, Text, TouchableOpacity, Button, StyleSheet, Image } from 'react-native'
 import  HowToPlay from './HowToPlay.js'
 import PlanetView from './PlanetView.js'
+
 
 class GameMenu extends React.Component{
   render(){
@@ -12,8 +14,8 @@ class GameMenu extends React.Component{
         <Text style={{fontSize: '35px', color: '#ffffff'}}>My Solar System</Text>
           <Button onPress={() => navigation.navigate('PlanetView')} color='#F7CD46' title='Start Game'/>
       </View>
-    )
 
+    )
   }
 }
 
