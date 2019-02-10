@@ -21,10 +21,10 @@ class GameMenu extends React.Component{
     const { navigation } = this.props
     return (
       <View style={styles.container}>
-      <Text style={{fontSize: 35, color: '#ffffff'}}>My Solar System</Text>
+      <Image style={{width: 376, height: 168 }} source={{uri:'https://i.postimg.cc/NfkS41RR/solar-logo.png'}}/>
       <Image style={{width: 400, height: 400}} source={{uri:'https://i.postimg.cc/k5K16fpK/kisspng-the-nine-planets-solar-system-saturn-clip-art-solar-5abe.png'}}/>
           <Button color="white" type="outline" onPress={() => navigation.navigate('Counter')} color='#F7CD46' title='Start Game'/>
-          <Button onPress={() => navigation.navigate('HowToPlay')} color='#F7CD46' title='How to play?'/>
+          <Button onPress={() => navigation.navigate('HowToPlay')} color='#F7CD46' font='futura' title='How to play?'/>
       </View>
 
     )
