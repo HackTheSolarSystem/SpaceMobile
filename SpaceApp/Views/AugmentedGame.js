@@ -7,22 +7,19 @@ import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
 // expo-graphics manages the setup/teardown of the gl context/ar session, creates a frame-loop, and observes size/orientation changes.
 // it also provides debug information with `isArCameraStateEnabled`
 import { View as GraphicsView } from 'expo-graphics';
+import planetMaker from '../Components/PlanetMaker';
 
 
 
 class AugmentedGame extends React.Component {
   componentDidMount() {
-    // Turn off extra warnings
     THREE.suppressExpoWarnings(true)
     ThreeAR.suppressWarnings()
   }
-  
+  orbit(radius){
+    
+  }
   render() {
-    // You need to add the `isArEnabled` & `arTrackingConfiguration` props.
-    // `isArRunningStateEnabled` Will show us the play/pause button in the corner.
-    // `isArCameraStateEnabled` Will render the camera tracking information on the screen.
-    // `arTrackingConfiguration` denotes which camera the AR Session will use. 
-    // World for rear, Face for front (iPhone X only)
     return (
       <GraphicsView
         style={{ flex: 1 }}
@@ -36,10 +33,7 @@ class AugmentedGame extends React.Component {
       />
     );
   }
-
-  // When our context is built we can start coding 3D things.
   onContextCreate = async ({ gl, scale: pixelRatio, width, height }) => {
-    // This will allow ARKit to collect Horizontal surfaces
     AR.setPlaneDetection(AR.PlaneDetection.Horizontal);
 
     // Create a 3D renderer
@@ -59,29 +53,31 @@ class AugmentedGame extends React.Component {
     this.camera = new ThreeAR.Camera(width, height, 0.01, 1000);
     
     //sun
-    const geometry = new THREE.SphereGeometry(0.2, 0.2, 0.2); //passes the data for a circle
-    const material = new THREE.MeshPhongMaterial({
-      color: 0xFCD440,
-    });
-    this.sun = new THREE.Mesh(geometry, material);
+    // const geometry = new THREE.SphereGeometry(0.2, 0.2, 0.2); //passes the data for a circle
+    // const material = new THREE.MeshPhongMaterial({
+    //   color: 0xFCD440,
+    // });
+    // this.sun = new THREE.Mesh(geometry, material);
+    this.sun = planetMaker(0, 0, 0.3, 0, 0xFCD440, 0.3, 0)
     // Place the box 0.4 meters in front of us.
-    this.sun.position.z = -0.4 //potentially used to change position based on user data as they move
+    this.sun.position.z = 0.3 //potentially used to change position based on user data as they move
+    this.earth = planetMaker(0.1, 0.9, -0.6, 0, 0x00BFFF, 0.1)
+    this.scene.add(this.earth);
     this.scene.add(this.sun);
-
-    //neptune
-    const neptuneGeometry = new THREE.SphereGeometry(0.1, 0.1, 0.1); //passes the data for a circle
-    const neptuneMaterial = new THREE.MeshPhongMaterial({
-      color: 0x00BFFF,
+   //Mars
+    const marsGeometry = new THREE.SphereGeometry(0.1, 0.1, 0.1); //passes the data for a circle
+    const marsMaterial = new THREE.MeshPhongMaterial({
+      color: 0xC1440E,
     });
-    this.neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
+    this.mars = new THREE.Mesh(marsGeometry, marsMaterial);
     // Place the box 0.4 meters in front of us.
-    this.neptune.position.z = -0.6 //potentially used to change position based on user data as they move
-    this.neptune.position.y = 0.9
-    console.log(this.neptune.position)
-    this.scene.add(this.neptune);
+    this.mars.position.z = 0.6 //potentially used to change position based on user data as they move
+    this.mars.position.y = 0.9
+    this.mars.position.x = 0.1
+    this.scene.add(this.mars);
     
-    // Setup a light so we can see the cube color
-    // AmbientLight colors all things in the scene equally.
+
+
     this.scene.add(new THREE.AmbientLight(0xffffff));
 
     // Create this cool utility function that let's us see all the raw data points.
