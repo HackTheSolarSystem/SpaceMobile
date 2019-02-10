@@ -5,6 +5,7 @@ import Torch from 'react-native-torch';
 
 import PlanetView from './PlanetView';
 import Accelerometer from '../Components/Accelerometer';
+import AugmentedGame from './AugmentedGame';
 
 export default class PedometerSensor extends React.Component {
   constructor() {
@@ -37,6 +38,7 @@ export default class PedometerSensor extends React.Component {
   componentDidMount() {
     this._subscribe();
     this.setState({ currentStepCount: 0 })
+    this.stepPusher()
   }
 
   componentWillUnmount() {
@@ -84,6 +86,13 @@ export default class PedometerSensor extends React.Component {
     this._subscription = null;
   };
 
+  stepPusher = () => {
+     setInterval(()=>{
+      const count = ++this.state.currentStepCount
+      this.setState({currentStepCount: count })
+    },1000)
+  }
+
   // _updateDistanceCheck = () => {
   //   // if (!this.state.distanceCheck) {
   //   this.setState({ distanceCheck: true })
@@ -108,6 +117,10 @@ export default class PedometerSensor extends React.Component {
       )
     };
 
+//last-fixes
+    if (this.state.currentStepCount < this.state.celestialBody.distanceRoom) {
+      const {name, distanceActual, distanceRoom} = this.state.celestialBody;
+      const {currentStepCount} = this.state;
     // if (!this.state.gameStatus) {
     //   return (
     //     <View style={styles.container}>
@@ -135,6 +148,7 @@ export default class PedometerSensor extends React.Component {
     if (this.state.currentStepCount <= 1) {
       const { name, distanceActual, distanceRoom } = this.state.celestialBody;
       const { currentStepCount } = this.state;
+      
       return (
         <View style={styles.container}>
           <PlanetView name={name} distanceActual={distanceActual} distanceRoom={distanceRoom} currentStepCount={currentStepCount} />
@@ -142,7 +156,7 @@ export default class PedometerSensor extends React.Component {
       )
     };
 
-    if (this.state.currentStepCount > this.state.celestialBody.distanceRoom) {
+    if (this.state.currentStepCount >= this.state.celestialBody.distanceRoom) {
       // { !this.state.distanceCheck ? this._updateDistanceCheck : null }
       return (
         <View style={styles.container}>
@@ -150,6 +164,9 @@ export default class PedometerSensor extends React.Component {
           <Text style={{ fontSize: 50, color: '#ffffff' }}>
             Begin orbiting
           </Text>
+//           {/* <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} /> */}
+//           <AugmentedGame speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom}/>
+
           <Image style={{ width: 400, height: 400 }} source={{ uri: 'https://i.postimg.cc/g0DCd9Mr/Planet-500x500-Earth.png' }} />
           <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} />
         </View>
@@ -158,6 +175,8 @@ export default class PedometerSensor extends React.Component {
 
     return (
       <View style={styles.container}>
+              <Image style={{width: 500, height: 247}} source={{uri:'https://i.postimg.cc/vmxpWDMn/Planet-500x500.png'}}/>
+
         <Text>
           You are {this.state.celestialBody.name}
         </Text>
