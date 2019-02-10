@@ -1,7 +1,5 @@
 import React from 'react';
 import { AR, Asset } from 'expo';
-console.log(AR.TrackingConfigurations)
-
 
 // Let's alias ExpoTHREE.AR as ThreeAR so it doesn't collide with Expo.AR.
 import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
@@ -29,10 +27,10 @@ class AugmentedGame extends React.Component {
         onContextCreate={this.onContextCreate}
         onRender={this.onRender}
         onResize={this.onResize}
-        isArEnabled
+        isArEnabled={true}
         isArRunningStateEnabled
         // isArCameraStateEnabled
-        arTrackingConfiguration={AR.TrackingConfigurations.World}
+        arTrackingConfiguration={AR.TrackingConfiguration.World}
       />
     );
   }
@@ -40,7 +38,7 @@ class AugmentedGame extends React.Component {
   // When our context is built we can start coding 3D things.
   onContextCreate = async ({ gl, scale: pixelRatio, width, height }) => {
     // This will allow ARKit to collect Horizontal surfaces
-    AR.setPlaneDetection(AR.PlaneDetectionTypes.Horizontal);
+    AR.setPlaneDetection(AR.PlaneDetection.Horizontal);
 
     // Create a 3D renderer
     this.renderer = new ExpoTHREE.Renderer({
