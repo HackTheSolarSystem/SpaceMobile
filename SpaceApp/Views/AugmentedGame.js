@@ -8,7 +8,7 @@ import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
 // it also provides debug information with `isArCameraStateEnabled`
 import { View as GraphicsView } from 'expo-graphics';
 
-console.log(THREE.Triangle)
+
 
 class AugmentedGame extends React.Component {
   componentDidMount() {
