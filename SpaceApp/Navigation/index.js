@@ -2,10 +2,12 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'
 
 import GameMenu from '../Views/GameMenu'
 import Test from '../Views/Test'
+import PlanetView from '../Views/PlanetView'
 
 const AppNavigator = createStackNavigator({
   GameMenu,
-  Test
+  Test,
+  PlanetView
 }, {
   initialRouteName: 'GameMenu'
 })

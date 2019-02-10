@@ -10,8 +10,8 @@ class AugmentedGame extends React.Component{
         </View>
       )
     }
-
-
 }
+
+
 
 export default AugmentedGame
