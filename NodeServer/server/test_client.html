@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>TEST CLIENT</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div id="msg"></div>
+  <input type="button" id="join" value="join" />
+  <input type="button" id="start" value="start" />
+  <input type="button" id="move" value="move" />
+  <input type="button" id="end" value="end" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+  $(function(){
+    // connet to the server
+    var socket = io();
+    var planet_name = null;
+
+    $( "#join" ).click(function() {
+        if (planet_name != null) {
+            $("#msg").append("<div>You can join only once.</div>");
+            return;
+        }
+        socket.emit("join");
+    });
+
+    $("#start").click(function() {
+        socket.emit("start");
+    });
+
+    $("#end").click(function() {
+        socket.emit("end");
+    });
+
+    socket.on("join", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            planet_name = data.planet_name;
+            $("#msg").append("<div>I am " + data.planet_name + ".</div>");      
+        }
+      
+    });
+
+    socket.on("start", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            $("#msg").append("<div>" + data.message + ".</div>");      
+        }
+      
+    });
+
+    socket.on("end", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            planet_name = null;
+            $("#msg").append("<div>" + data.message + ".</div>");
+        }
+    });
+
+  });
+  </script>
+</body>
+</html>
