@@ -5,4 +5,9 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
+<<<<<<< HEAD
+=======
+View/
+Views/.expo/
+>>>>>>> 3d81383270be96693a1957acdc4521d6cc620a47
 package-lock.json
