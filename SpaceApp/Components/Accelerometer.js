@@ -1,10 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Accelerometer } from 'expo';
+import { Accelerometer, DeviceMotion } from 'expo';
 
 export default class AccelerometerSensor extends React.Component {
-  state = {
-    accelerometerData: {},
+  constructor(props) {
+    super(props)
+    this.state = {
+      accelerometerData: {},
+    }
   }
 
   componentDidMount() {
@@ -44,34 +47,29 @@ export default class AccelerometerSensor extends React.Component {
 
   render() {
     let { x, y, z } = this.state.accelerometerData;
+    const acceleration = Math.sqrt(x ** 2 + y ** 2 + z ** 2)
+    let { speedOfOrbitRoom } = this.props;
 
-    return (
-      <View style={styles.sensor}>
-        <Text>Accelerometer:</Text>
-        <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this._toggle} style={styles.button}>
-            <Text>Toggle</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this._slow} style={[styles.button, styles.middleButton]}>
-            <Text>Slow</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this._fast} style={styles.button}>
-            <Text>Fast</Text>
-          </TouchableOpacity>
+    if (acceleration <= speedOfOrbitRoom + 0.2 && acceleration >= speedOfOrbitRoom - 0.2) {
+      return (
+        <View style={styles.sensor}>
+          <Text>SWEET ORBIT!</Text>
         </View>
-      </View>
-    );
+      );
+    } else if (acceleration >= speedOfOrbitRoom + 0.4) {
+      return (
+        <View style={styles.sensor}>
+          <Text>SLOWER!</Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.sensor}>
+          <Text>FASTER!</Text>
+        </View>
+      )
+    }
   }
-}
-
-function round(n) {
-  if (!n) {
-    return 0;
-  }
-
-  return Math.floor(n * 100) / 100;
 }
 
 const styles = StyleSheet.create({
