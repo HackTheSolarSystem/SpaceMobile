@@ -8,6 +8,8 @@ import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
 // it also provides debug information with `isArCameraStateEnabled`
 import { View as GraphicsView } from 'expo-graphics';
 
+console.log(THREE.Triangle)
+
 class AugmentedGame extends React.Component {
   componentDidMount() {
     // Turn off extra warnings
@@ -55,20 +57,21 @@ class AugmentedGame extends React.Component {
     // Now we make a camera that matches the device orientation. 
     // Ex: When we look down this camera will rotate to look down too!
     this.camera = new ThreeAR.Camera(width, height, 0.01, 1000);
-    
-    // Make a cube - notice that each unit is 1 meter in real life, we will make our box 0.1 meters
-    const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+  
+    const geometry = new THREE.SphereGeometry(0.2, 0.2, 0.2); //passes the data for a circle
+  
     // Simple color material
     const material = new THREE.MeshPhongMaterial({
-      color: 0xff00ff,
+      color: 0xFCD440,
     });
     
     // Combine our geometry and material
-    this.cube = new THREE.Mesh(geometry, material);
+    this.planet = new THREE.Mesh(geometry, material);
+    
     // Place the box 0.4 meters in front of us.
-    this.cube.position.z = -0.4
+    this.planet.position.z = -0.4 //potentially used to change position based on user data as they move
     // Add the cube to the scene
-    this.scene.add(this.cube);
+    this.scene.add(this.planet);
     
     // Setup a light so we can see the cube color
     // AmbientLight colors all things in the scene equally.
