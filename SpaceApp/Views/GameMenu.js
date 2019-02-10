@@ -7,34 +7,30 @@ import Counter from './Counter.js'
 
 
 class GameMenu extends React.Component{
+  static navigationOptions = {
+    title: 'Home',
+    headerStyle: {
+      backgroundColor: '#000000',
+    },
+    headerTintColor: '#000000',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
   render(){
     const { navigation } = this.props
     return (
       <View style={styles.container}>
-      <Image style={{width: 400, height: 400}} source={{uri:'https://i.postimg.cc/g0DCd9Mr/Planet-500x500-Earth.png'}}/>
-        <Text style={{fontSize: 35, color: '#ffffff'}}>My Solar System</Text>
+      <Text style={{fontSize: 35, color: '#ffffff'}}>My Solar System</Text>
+      <Image style={{width: 400, height: 400}} source={{uri:'https://i.postimg.cc/k5K16fpK/kisspng-the-nine-planets-solar-system-saturn-clip-art-solar-5abe.png'}}/>
+          <Button color="white" type="outline" onPress={() => navigation.navigate('Counter')} color='#F7CD46' title='Start Game'/>
           <Button onPress={() => navigation.navigate('HowToPlay')} color='#F7CD46' title='How to play?'/>
-          <Button onPress={() => navigation.navigate('Counter')} color='#F7CD46' title='Start Game'/>
       </View>
 
     )
   }
 }
 
-// class HomeScreen extends React.Component {
-//   static navigationOptions = {
-//     title: 'Home',
-//     headerStyle: {
-//       backgroundColor: '#f4511e',
-//     },
-//     headerTintColor: '#fff',
-//     headerTitleStyle: {
-//       fontWeight: 'bold',
-//     },
-//   };
-
-//   /* render function, etc */
-// }
 
 const styles = StyleSheet.create({
   container: {
