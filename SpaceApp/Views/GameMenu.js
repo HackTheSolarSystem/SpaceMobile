@@ -11,7 +11,7 @@ class GameMenu extends React.Component{
     return (
       <View style={styles.container}>
       <Image style={{width: 400, height: 400}} source={{uri:'https://i.postimg.cc/g0DCd9Mr/Planet-500x500-Earth.png'}}/>
-        <Text style={{fontSize: '35px', color: '#ffffff'}}>My Solar System</Text>
+        <Text style={{fontSize: 35, color: '#ffffff'}}>My Solar System</Text>
           <Button onPress={() => navigation.navigate('PlanetView')} color='#F7CD46' title='Start Game'/>
       </View>
 

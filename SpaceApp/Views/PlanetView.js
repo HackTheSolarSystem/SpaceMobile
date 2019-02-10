@@ -7,7 +7,7 @@ class PlanetView extends React.Component{
     return (
       <View style={styles.container}>
       <Image style={{width: 400, height: 400}} source={{uri:'https://i.postimg.cc/PrF3WWx3/Planet-500x500.png'}}/>
-        <Text style={{fontSize: '50px', color: '#ffffff'}}>You are Saturn</Text>
+        <Text style={{fontSize: 50, color: '#ffffff'}}>You are Saturn</Text>
         <Text>This is Saturn</Text>
         <Text>You are 0 out of 50 steps from the sun</Text>
       </View>

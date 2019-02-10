@@ -11,7 +11,7 @@ const AppNavigator = createStackNavigator({
   PlanetView,
   AugmentedGame
 }, {
-    initialRouteName: 'Test'
+    initialRouteName: 'GameMenu'
   })
 
 const AppContainer = createAppContainer(AppNavigator)
