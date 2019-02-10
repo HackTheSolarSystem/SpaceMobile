@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
+const syncAndSeed = require('./Models/index.js')
 
 const app = express()
 
@@ -14,3 +15,4 @@ const io = require('socket.io')(server)
 
 require('./sockets')(io) //passes that to the socket events we created
 
+syncAndSeed()
