@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Pedometer } from "expo";
 
+import PlanetView from './PlanetView';
 import Accelerometer from '../Components/Accelerometer';
 
 export default class PedometerSensor extends React.Component {
@@ -91,15 +92,18 @@ export default class PedometerSensor extends React.Component {
     };
 
     if (this.state.currentStepCount <= 1) {
+      const {name, distanceActual, distanceRoom} = this.state.celestialBody;
+      const {currentStepCount} = this.state;
       return (
         <View style={styles.container}>
-          <Text>
+          <PlanetView name={name} distanceActual={distanceActual} distanceRoom={distanceRoom} currentStepCount={currentStepCount}/>
+          {/* <Text>
             You are {this.state.celestialBody.name}
-          </Text>
-          <Text>
+          </Text> */}
+          {/* <Text>
             Walk {this.state.celestialBody.distanceActual} watermelons
             <Text> ({this.state.celestialBody.distanceRoom} steps) away from the Sun.</Text>
-          </Text>
+          </Text> */}
         </View>
       )
     };
@@ -108,6 +112,7 @@ export default class PedometerSensor extends React.Component {
       // { !this.state.distanceCheck ? this._updateDistanceCheck : null }
       return (
         <View style={styles.container}>
+        {/*NEEDS VIEW FOR SPEEDING UP SLOWING DOWN*/}
           <Text>
             Begin orbiting
           </Text>

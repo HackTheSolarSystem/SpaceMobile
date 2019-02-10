@@ -21,20 +21,20 @@ class GameMenu extends React.Component{
   }
 }
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
+// class HomeScreen extends React.Component {
+//   static navigationOptions = {
+//     title: 'Home',
+//     headerStyle: {
+//       backgroundColor: '#f4511e',
+//     },
+//     headerTintColor: '#fff',
+//     headerTitleStyle: {
+//       fontWeight: 'bold',
+//     },
+//   };
 
-  /* render function, etc */
-}
+//   /* render function, etc */
+// }
 
 const styles = StyleSheet.create({
   container: {
