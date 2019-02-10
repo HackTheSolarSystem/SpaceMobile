@@ -12,8 +12,10 @@ class Counter extends React.Component{
             style={styles.container}
           until={3}
           onFinish={() => navigation.navigate('GameLogic')}
-          size={60}
+          size={150}
           timeToShow={['S']}
+          digitStyle={{backgroundColor: '#000000'}}
+          digitTxtStyle={{color: '#F5D048'}}
         />
       )
   }

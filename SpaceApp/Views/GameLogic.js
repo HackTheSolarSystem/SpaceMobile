@@ -14,12 +14,12 @@ export default class PedometerSensor extends React.Component {
       currentStepCount: 0,
       activeGame: false,
       celestialBody: {
-        name: 'Earth',
-        description: '',
-        distanceRoom: 2,
-        distanceActual: 5000,
-        speedOfOrbitRoom: 1.2,
-        speedOfOrbitActual: 5000,
+        name: 'Saturn',
+        description: 'Saturn has 62 moons',
+        distanceRoom: 15,
+        distanceActual: 3713,
+        speedOfOrbitRoom: 0.6,
+        speedOfOrbitActual: 40,
       },
       distanceCheck: false,
       speedCheck: false,
@@ -134,7 +134,6 @@ export default class PedometerSensor extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 15,
     alignItems: "center",
     justifyContent: "center"
   }
