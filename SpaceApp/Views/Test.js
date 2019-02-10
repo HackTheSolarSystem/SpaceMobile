@@ -14,9 +14,9 @@ export default class PedometerSensor extends React.Component {
       celestialBody: {
         name: 'Earth',
         description: '',
-        distanceRoom: 5,
+        distanceRoom: 2,
         distanceActual: 5000,
-        speedOfOrbitRoom: 2,
+        speedOfOrbitRoom: 1.2,
         speedOfOrbitActual: 5000,
       },
       distanceCheck: false,
@@ -76,7 +76,7 @@ export default class PedometerSensor extends React.Component {
   // _updateDistanceCheck = () => {
   //   this.setState({ distanceCheck: true })
   //   console.log(this.state.distanceCheck)
-  // }
+  //
 
   render() {
     if (!Pedometer.isAvailableAsync()) {
@@ -95,7 +95,7 @@ export default class PedometerSensor extends React.Component {
           </Text>
           <Text>
             Walk {this.state.celestialBody.distanceActual} watermelons
-            <Text> (a.k.a. {this.state.celestialBody.distanceRoom} steps) away from the Sun.</Text>
+            <Text> ({this.state.celestialBody.distanceRoom} steps) away from the Sun.</Text>
           </Text>
         </View>
       )
@@ -106,9 +106,9 @@ export default class PedometerSensor extends React.Component {
         <View style={styles.container}>
           {/* {this._updateDistanceCheck()} */}
           <Text>
-            Begin orbit
+            Begin orbiting
           </Text>
-          <Accelerometer />
+          <Accelerometer speedOfOrbitRoom={this.state.celestialBody.speedOfOrbitRoom} />
         </View>
       )
     };
