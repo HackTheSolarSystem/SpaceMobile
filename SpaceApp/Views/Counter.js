@@ -11,7 +11,7 @@ class Counter extends React.Component{
         <CountDown
             style={styles.container}
           until={3}
-          onFinish={() => navigation.navigate('PlanetView')}
+          onFinish={() => navigation.navigate('GameLogic')}
           size={60}
           timeToShow={['S']}
         />

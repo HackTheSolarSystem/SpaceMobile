@@ -15,7 +15,7 @@ const AppNavigator = createStackNavigator({
   HowToPlay,
   Counter
 }, {
-    initialRouteName: 'GameLogic'
+    initialRouteName: 'GameMenu'
   })
 
 const AppContainer = createAppContainer(AppNavigator)
