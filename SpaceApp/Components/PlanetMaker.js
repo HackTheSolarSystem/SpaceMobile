@@ -11,5 +11,15 @@ import { View as GraphicsView } from 'expo-graphics';
 
 
 module.export = (planetName) => {
-
+  
+  
 }
+
+// 'Mercury'
+// Venus
+// Earth
+// Mars
+// Jupiter
+// Saturn
+// Uranus
+// Neptune

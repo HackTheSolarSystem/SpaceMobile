@@ -57,21 +57,28 @@ class AugmentedGame extends React.Component {
     // Now we make a camera that matches the device orientation. 
     // Ex: When we look down this camera will rotate to look down too!
     this.camera = new ThreeAR.Camera(width, height, 0.01, 1000);
-  
+    
+    //sun
     const geometry = new THREE.SphereGeometry(0.2, 0.2, 0.2); //passes the data for a circle
-  
-    // Simple color material
     const material = new THREE.MeshPhongMaterial({
       color: 0xFCD440,
     });
-    
-    // Combine our geometry and material
-    this.planet = new THREE.Mesh(geometry, material);
-    
+    this.sun = new THREE.Mesh(geometry, material);
     // Place the box 0.4 meters in front of us.
-    this.planet.position.z = -0.4 //potentially used to change position based on user data as they move
-    // Add the cube to the scene
-    this.scene.add(this.planet);
+    this.sun.position.z = -0.4 //potentially used to change position based on user data as they move
+    this.scene.add(this.sun);
+
+    //neptune
+    const neptuneGeometry = new THREE.SphereGeometry(0.1, 0.1, 0.1); //passes the data for a circle
+    const neptuneMaterial = new THREE.MeshPhongMaterial({
+      color: 0x00BFFF,
+    });
+    this.neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
+    // Place the box 0.4 meters in front of us.
+    this.neptune.position.z = -0.6 //potentially used to change position based on user data as they move
+    this.neptune.position.y = 0.9
+    console.log(this.neptune.position)
+    this.scene.add(this.neptune);
     
     // Setup a light so we can see the cube color
     // AmbientLight colors all things in the scene equally.
