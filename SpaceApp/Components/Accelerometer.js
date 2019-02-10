@@ -72,31 +72,31 @@ export default class AccelerometerSensor extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
-    alignItems: 'center',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    marginTop: 15,
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eee',
-    padding: 10,
-  },
-  middleButton: {
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderColor: '#ccc',
-  },
-  sensor: {
-    marginTop: 15,
-    paddingHorizontal: 10,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#000000',
+//     alignItems: 'center',
+//   },
+//   buttonContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'stretch',
+//     marginTop: 15,
+//   },
+//   button: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     backgroundColor: '#eee',
+//     padding: 10,
+//   },
+//   middleButton: {
+//     borderLeftWidth: 1,
+//     borderRightWidth: 1,
+//     borderColor: '#ccc',
+//   },
+//   sensor: {
+//     marginTop: 15,
+//     paddingHorizontal: 10,
+//   },
+// });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { AR, Asset } from 'expo';
+import { View } from 'react-native'
 
 // Let's alias ExpoTHREE.AR as ThreeAR so it doesn't collide with Expo.AR.
 import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
@@ -11,6 +12,20 @@ import { View as GraphicsView } from 'expo-graphics';
 
 
 class AugmentedGame extends React.Component {
+  // constructor(props){
+  //   super(props)
+  //   this.navigationOptions = this.navigationOptions.bind(this)
+  // }
+  static navigationOptions = {
+    title: 'See Other Planets',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
+  }
   componentDidMount() {
     // Turn off extra warnings
     THREE.suppressExpoWarnings(true)
@@ -79,6 +94,18 @@ class AugmentedGame extends React.Component {
     this.neptune.position.y = 0.9
     console.log(this.neptune.position)
     this.scene.add(this.neptune);
+
+    //Mars
+     const marsGeometry = new THREE.SphereGeometry(0.1, 0.1, 0.1); //passes the data for a circle
+     const marsMaterial = new THREE.MeshPhongMaterial({
+       color: 0xC1440E,
+     });
+     this.mars = new THREE.Mesh(marsGeometry, marsMaterial);
+     // Place the box 0.4 meters in front of us.
+     this.mars.position.z = 0.6 //potentially used to change position based on user data as they move
+     this.mars.position.y = 0.9
+     this.mars.position.x = 0.1
+     this.scene.add(this.mars);
     
     // Setup a light so we can see the cube color
     // AmbientLight colors all things in the scene equally.
