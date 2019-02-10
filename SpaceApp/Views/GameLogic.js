@@ -75,9 +75,11 @@ export default class PedometerSensor extends React.Component {
   };
 
   // _updateDistanceCheck = () => {
+  //   // if (!this.state.distanceCheck) {
   //   this.setState({ distanceCheck: true })
   //   console.log(this.state.distanceCheck)
-  //
+  //   // }
+  // }
 
   render() {
     if (!Pedometer.isAvailableAsync()) {
@@ -103,9 +105,9 @@ export default class PedometerSensor extends React.Component {
     };
 
     if (this.state.currentStepCount > this.state.celestialBody.distanceRoom) {
+      // { !this.state.distanceCheck ? this._updateDistanceCheck : null }
       return (
         <View style={styles.container}>
-          {/* {this._updateDistanceCheck()} */}
           <Text>
             Begin orbiting
           </Text>
