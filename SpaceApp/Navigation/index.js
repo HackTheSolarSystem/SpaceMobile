@@ -9,8 +9,8 @@ const AppNavigator = createStackNavigator({
   AugmentedGame,
   Test
 }, {
-  initialRouteName: 'GameMenu'
-})
+    initialRouteName: 'Test'
+  })
 
 const AppContainer = createAppContainer(AppNavigator)
 
