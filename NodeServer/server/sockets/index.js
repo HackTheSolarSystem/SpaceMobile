@@ -83,6 +83,7 @@ const get_random_planet_index = () => {
             available_planet_indexes.push(i);
         }
     }
+    // is spot left?
     if (available_planet_indexes.length == 0) {
         return -1;
     }else {
@@ -97,6 +98,10 @@ const init_player_by_socket_id = (socket_id) => {
             planets[i]['socket_id'] = null;
         }
     }
+}
+
+const start_game = () => {
+    status = 'playing';
 }
 
 const sung_debug = () => {
@@ -131,8 +136,20 @@ io.on('connection', socket => {
     // start game
     socket.on('start', () => {
         if (is_sun(socket.id)) {
+            start_game();
+            io.emit("start", {"message": "game started"});
+            console.log(`Sun started the game`);
+        }else {
+            socket.emit("start", {"error": "only Sun can start game"});
+        }
+        sung_debug();
+    })
+
+    // end game
+    socket.on('end', () => {
+        if (is_sun(socket.id)) {
             status = 'playing'
-            socket.emit("start", {"message": "game started"});
+            io.emit("end", {"message": "game started"});
             console.log(`Sun started the game`);
         }else {
             socket.emit("start", {"error": "only Sun can start game"});

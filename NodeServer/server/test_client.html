@@ -16,27 +16,34 @@
   <script>
   $(function(){
     // connet to the server
-    var socket = null;
+    var socket = io();
     var planet_name = null;
 
+    socket.on("join", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            planet_name = data.planet_name;
+            $("#msg").append("<div>I am " + data.planet_name + ".</div>");      
+        }
+      
+    });
+
+    socket.on("start", data => {
+        if (typeof data.error != 'undefined') {
+            $("#msg").append("<div>" + data.error + ".</div>");
+        }else {
+            $("#msg").append("<div>" + data.message + ".</div>");      
+        }
+      
+    });
+    
     $( "#join" ).click(function() {
-        if (socket != null) {
-            if (planet_name != null) {
-                $("#msg").append("<div>You can join only once.</div>");
-            }
+        if (planet_name != null) {
+            $("#msg").append("<div>You can join only once.</div>");
             return;
         }
-        socket = io();
         socket.emit("join");
-        socket.on("join", data => {
-            if (typeof data.error != 'undefined') {
-                $("#msg").append("<div>" + data.error + ".</div>");
-            }else {
-                planet_name = data.planet_name;
-                $("#msg").append("<div>I am " + data.planet_name + ".</div>");      
-            }
-          
-        });
     });
 
     $("#start").click(function() {
@@ -45,14 +52,6 @@
             return;
         }
         socket.emit("start");
-        socket.on("start", data => {
-            if (typeof data.error != 'undefined') {
-                $("#msg").append("<div>" + data.error + ".</div>");
-            }else {
-                $("#msg").append("<div>" + data.message + ".</div>");      
-            }
-          
-        });
     });
   });
   </script>
