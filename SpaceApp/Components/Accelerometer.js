@@ -50,22 +50,22 @@ export default class AccelerometerSensor extends React.Component {
     const acceleration = Math.sqrt(x ** 2 + y ** 2 + z ** 2)
     let { speedOfOrbitRoom } = this.props;
 
-    if (acceleration <= speedOfOrbitRoom + 0.2 && acceleration >= speedOfOrbitRoom - 0.2) {
+    if (acceleration <= speedOfOrbitRoom + 0.3 && acceleration >= speedOfOrbitRoom - 0.3) {
       return (
         <View style={styles.sensor}>
           <Text>SWEET ORBIT!</Text>
         </View>
       );
-    } else if (acceleration < speedOfOrbitRoom - 0.25) {
+    } else if (acceleration >= speedOfOrbitRoom + 0.4) {
       return (
         <View style={styles.sensor}>
-          <Text>SPEED UP!</Text>
+          <Text>SLOW DOWN!</Text>
         </View>
       )
     } else {
       return (
         <View style={styles.sensor}>
-          <Text>SLOW DOWN!</Text>
+          <Text>SPEED UP!</Text>
         </View>
       )
     }
