@@ -6,3 +6,5 @@ Every kid will need a device and will get assigned randomly a celestial body. If
 The team with the fastest time to assemble is the winner of this game. 
 
 We have built this app using React Native and React Native AR. 
+
+Authors: Sungok Lim, Jordane Frouin, Amr Thameen, Harry Chen, Robert "Bobby" Hirtle
